@@ -1,45 +1,45 @@
-import React from 'react';
-import 'bulma';
-import '../App.css';
-import { Helmet } from 'react-helmet';
-import Footer from '../components/Footer';
+import React from "react"
+import "bulma"
+import "../App.css"
+import { Helmet } from "react-helmet"
+import Footer from "../components/Footer"
 
 const Home = () => {
-  //const [projectData, setProjectData] = React.useState<any>(undefined);
+    //const [projectData, setProjectData] = React.useState<any>(undefined);
 
-  return (
-    <div>
-      <Helmet>
-        <title>Home | AmariBackgrounds</title>
-      </Helmet>
+    return (
+        <div>
+            <Helmet>
+                <title>Home | AmariBackgrounds</title>
+                <meta name="theme-color" content="#70503C" media="(prefers-color-scheme: dark)"></meta>
+            </Helmet>
 
+            <div style={{ maxWidth: "60rem", margin: "auto", textAlign: "center" }}>
+                <br />
+                <br />
 
-      <div style={{ maxWidth: '60rem', margin: 'auto', textAlign: 'center' }}>
-        <br />
-        <br />
+                <h1 className="is-1 title">
+                    <figure className="image" style={{ width: "256px", display: "inline-block", verticalAlign: "middle" }}>
+                        <img src="/AmariSmol.png" alt="Wolvesville Utopium Logo" />
+                    </figure>
+                    <br />
+                    <span style={{ marginRight: "20px" }} />
+                    AmariBackgrounds
+                </h1>
 
-        <h1 className="is-1 title">
-          <figure className="image" style={{ width: "256px", display: 'inline-block', verticalAlign: 'middle' }}>
-            <img src="/AmariSmol.png" alt="Wolvesville Utopium Logo" />
-          </figure>
-          <br />
-          <span style={{ marginRight: '20px' }} />
+                <p>
+                    <strong>AmariBackgrounds</strong> is a collection of backgrounds for AmariBot. We have over 200 Backgrounds and we get more almost everyday! Join our AmariBackground Discord Server below to submit your own!
+                </p>
 
-          AmariBackgrounds
-        </h1>
+                <br />
 
-        <p>
-          <strong>AmariBackgrounds</strong> is a collection of backgrounds for AmariBot.
-          We have over 200 Backgrounds and we get more almost everyday! Join our AmariBackground Discord Server below to submit your own!
-        </p>
+                <a href="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large">
+                    Join Server
+                </a>
 
-        <br />
+                <div style={{ height: "100px" }}></div>
 
-        <a href="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large">Join Server</a>
-
-        <div style={{ height: '100px' }}></div>
-
-        {/* <h4 className="is-4 title">
+                {/* <h4 className="is-4 title">
           Other Team Utopium Projects
         </h4>
 
@@ -91,11 +91,11 @@ const Home = () => {
             )
           }
         </div> */}
-      </div>
+            </div>
 
-      <Footer />
-    </div>
-  )
-};
+            <Footer />
+        </div>
+    )
+}
 
-export default Home;
+export default Home
