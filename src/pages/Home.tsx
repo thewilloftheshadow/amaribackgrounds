@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import Footer from '../components/Footer';
 
 const Home = () => {
-  const [projectData, setProjectData] = React.useState<any>(undefined);
+  //const [projectData, setProjectData] = React.useState<any>(undefined);
 
   return (
     <div>

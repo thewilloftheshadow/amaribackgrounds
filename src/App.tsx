@@ -4,7 +4,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseClient } from '@supabase/supabase-js';
 // import axios from 'axios';
 
 // Pages
