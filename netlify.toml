@@ -1,0 +1,14 @@
+[build]
+  command = "yarn build"
+  publish = "/build"
+  base = "/"
+
+[[redirects]]
+  from = "/api/projects"
+  to = "https://api.utopium.xyz/projects"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200

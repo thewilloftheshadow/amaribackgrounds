@@ -1,21 +1,51 @@
-.App {
-  text-align: center;
+.is-amariYellow {
+  background-color: #FBEAAF;
+  border-color: transparent;
+  color: #70503C;
+}
+.is-amariBrown {
+  background-color: #70503C;
+  border-color: transparent;
+  color: #fff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: cente  r;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.dash-menu {
+  position: sticky;
+  display: inline-block;
+  vertical-align: top;
+  max-height: 100vh;
+  overflow-y: auto;
+  width: 200px;
+  top: 0;
+  bottom: 0;
+  padding: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.dash-content {
+  display: inline-block;
+}
+
+/* Discord user/channel highlight */
+
+.highlight {
+  cursor: pointer;
+  color: #505cdc;
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 0px 2px;
+  background: rgba(88, 101, 242, 0.3);
+  transition: background-color 50ms ease-out 0s, color;
+  text-decoration: none;
+}
+
+.highlight:hover {
+  cursor: pointer;
+  color: #505cdc;
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 0px 2px;
+  background: rgba(88, 101, 242, 0.3);
+  transition: background-color 50ms ease-out 0s, color;
+  text-decoration: none;
 }
