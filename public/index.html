@@ -5,20 +5,23 @@
     <link rel="icon" href="%PUBLIC_URL%/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta name="title" content="User Info | Wolvesville Utopium" />
-    <meta property="description" content="Wolvesville Utopium - Play the Wolvesville game without ever leaving Discord!" />
-    <meta name="theme-color" content="#7289da" />
-    <meta property="og:title" content="Wolvesville Utopium" />
-    <meta property="og:theme-color" content="#7289da" />
-    <meta property="og:description" content="Wolvesville Utopium - Play the Wolvesville game without ever leaving Discord!" />
+    <meta name="title" content="AmariBackgrounds" />
+    <meta name="theme-color" content="#70503C" />
+    <meta property="og:title" content="AmariBackgrounds" />
+    <meta property="og:theme-color" content="#70503C" />
 
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link rel="manifest" href="manifest.json" />
+    <script type="module">
+      import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate"
+      const el = document.createElement("pwa-update")
+      document.body.appendChild(el)
+    </script>
   </head>
   <body>
-    <noscript>
-      You need to enable JavaScript to use AmariBackgrounds!
-    </noscript>
+    <noscript> You need to enable JavaScript to use AmariBackgrounds! </noscript>
     <div id="root"></div>
   </body>
 </html>
