@@ -3,6 +3,7 @@ import "bulma"
 import "../App.css"
 import { Helmet } from "react-helmet"
 import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
 
 const Home = () => {
     //const [projectData, setProjectData] = React.useState<any>(undefined);
@@ -14,13 +15,15 @@ const Home = () => {
                 <meta name="theme-color" content="#70503C" media="(prefers-color-scheme: dark)"></meta>
             </Helmet>
 
+            <Navbar />
+
             <div style={{ maxWidth: "60rem", margin: "auto", textAlign: "center" }}>
                 <br />
                 <br />
 
                 <h1 className="is-1 title">
                     <figure className="image" style={{ width: "256px", display: "inline-block", verticalAlign: "middle" }}>
-                        <img src="/AmariSmol.png" alt="Wolvesville Utopium Logo" />
+                        <img src="/AmariSmol.png" alt="AmariSmol Logo" />
                     </figure>
                     <br />
                     <span style={{ marginRight: "20px" }} />

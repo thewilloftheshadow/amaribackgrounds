@@ -9,7 +9,7 @@ const Login = async () => {
 
   if (error) {
     console.error(error);
-    alert('There was an error when trying to sign in. If this problem persists, please report this bug in #website-feedback-bugs in our Discord server. Sorry for any inconveniences caused.');
+    alert('There was an error when trying to sign in. If this problem persists, please report this bug in our Discord server. Sorry for any inconveniences caused.');
   };
 };
 
