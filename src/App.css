@@ -9,6 +9,11 @@
   color: #fff;
 }
 
+.home-button {
+  margin-left: 5px;
+  width: 250px;
+}
+
 
 .dash-menu {
   position: sticky;

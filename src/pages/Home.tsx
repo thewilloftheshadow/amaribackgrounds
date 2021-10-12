@@ -36,10 +36,10 @@ const Home = () => {
 
                 <br />
 
-                <a href="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large">
+                <a href="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large home-button">
                     Join Server
                 </a>
-                <a href="/backgrounds" target="_blank" rel="noreferrer" className="button is-amariYellow is-large padleft">
+                <a href="/backgrounds" className="button is-amariYellow is-large home-button">
                     View Backgrounds
                 </a>
 
