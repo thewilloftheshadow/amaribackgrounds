@@ -39,6 +39,9 @@ const Home = () => {
                 <a href="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large">
                     Join Server
                 </a>
+                <a href="/backgrounds" target="_blank" rel="noreferrer" className="button is-amariYellow is-large padleft">
+                    View Backgrounds
+                </a>
 
                 <div style={{ height: "100px" }}></div>
 
