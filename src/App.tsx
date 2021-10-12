@@ -21,7 +21,7 @@ declare global {
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 require('dotenv').config();
-if (!process.env.REACT_APP_ENVIRONMENT) throw new Error('Environment variable "REACT_APP_ENVIRONMENT" has not been setup');
+if (!process.env.REACT_APP_ENVIRONMENT) process.env.REACT_APP_ENVIRONMENT = "production"
 if (!['development', 'production'].includes(process.env.REACT_APP_ENVIRONMENT)) throw new Error('Environment variable "REACT_APP_ENVIRONMENT" is not one of "development" or "production"');
 if (!process.env.REACT_APP_SUPABASE_URL) throw new Error('Supabase environment variable "REACT_APP_SUPABASE_URL" has not been setup');
 if (!process.env.REACT_APP_SUPABASE_PUBLIC_KEY) throw new Error('Supabase environment variable "REACT_APP_SUPABASE_PUBLIC_KEY" has not been setup');
