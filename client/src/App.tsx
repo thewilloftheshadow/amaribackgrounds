@@ -10,7 +10,8 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 // Pages
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import ComingSoon from './pages/ComingSoon'
+import ComingSoon from './pages/ComingSoon';
+import Backgrounds from './pages/Backgrounds';
 
 // Supabase configuration
 declare global {
@@ -33,7 +34,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/backgrounds" component={ComingSoon} />
+        <Route exact path="/backgrounds" component={Backgrounds} />
         <Route exact path="/manage" component={ComingSoon} />
         <Route exact path="/upload" component={ComingSoon} />
         <Route component={NotFound} />

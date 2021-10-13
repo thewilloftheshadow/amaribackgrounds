@@ -14,6 +14,10 @@
   width: 250px;
 }
 
+.text-n {
+  text-align: center;
+}
+
 
 .dash-menu {
   position: sticky;
