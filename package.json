@@ -78,7 +78,7 @@
   },
   "scripts": {
     "dev": "REACT_APP_ENVIRONMENT=development node client/scripts/start.js",
-    "build": "node client/scripts/build.js",
+    "build": "cd client && node scripts/build.js",
     "test": "node client/scripts/test.js",
     "start": "npm run build && node index.js"
   },
