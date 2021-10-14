@@ -14,7 +14,7 @@ const Backgrounds = () => {
     })
       .then((data) => {
         console.log(data)
-        setProjectData(JSON.parse(data.request.response).resources)
+        setProjectData(JSON.parse(data.request.response))
       })
       .catch((error) => {
         console.error(error)
@@ -33,7 +33,7 @@ const Backgrounds = () => {
           {
             projectData?.length ?
             projectData.map((p) => (
-              <div><p>{p.public_id}</p><img src={p.url}></img></div>
+              <div><p>{p.name}</p><img src={p.url}></img></div>
             )) : projectData === null ? (
               <div>
                 <p className="has-text-danger">

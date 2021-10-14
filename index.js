@@ -30,7 +30,11 @@ api.get("/folder", async (req, res) => {
 
 api.get("/backgrounds", async (req, res) => {
   let bg = await cloudinary.v2.search.expression("public_id=amaribackgrounds*").max_results(200).execute()
-  res.json(bg)
+  let sendData = []
+  bg.resources.forEach(x => {
+    sendData.push({"name": x.filename, "url": x.secure_url, "format": x.format})
+  })
+  res.json(sendData)
 })
 
 api.get("/staff", async (req, res) => {
