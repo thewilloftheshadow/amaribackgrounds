@@ -4,7 +4,7 @@ const Login = async () => {
   }, {
     // Note: Supabase requires the 'identify' and 'email' scope
     scopes: 'identify email',
-    redirectTo: process.env.REACT_APP_ENVIRONMENT === 'development' ? 'http://localhost:3000' : undefined,
+    redirectTo: window.location.origin,
   });
 
   if (error) {

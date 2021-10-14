@@ -8,6 +8,14 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 })
+const {Client} = require("discord.js")
+const client = new Client({intents: ["GUILD_MEMBERS"]})
+client.login(process.env.TOKEN)
+
+
+const config = {
+  guild: "778894052799545355", staff: "816054426615152661"
+}
 
 const api = express.Router()
 
@@ -23,6 +31,11 @@ api.get("/folder", async (req, res) => {
 api.get("/backgrounds", async (req, res) => {
   let bg = await cloudinary.v2.search.expression("public_id=amaribackgrounds*").max_results(200).execute()
   res.json(bg)
+})
+
+api.get("/staff", async (req, res) => {
+  let staffIds = client.guilds.resolve(config.guild).members.cache.filter(x => x.roles.cache.has(config.staff)).map(x => x.id)
+  return staffIds
 })
 
 app.use(express.static(path.join(__dirname, "client/build")))
