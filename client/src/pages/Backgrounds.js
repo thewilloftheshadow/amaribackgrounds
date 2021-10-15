@@ -8,6 +8,7 @@ import usePagination from "../hooks/usePagination"
 
 const Backgrounds = () => {
   const [backgrounds, setBackgrounds] = React.useState([])
+  const [tags, setTags] = React.useState([])
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } = usePagination({
@@ -18,7 +19,10 @@ const Backgrounds = () => {
     ;(async () => {
       try {
         const data = await axios.get(`${window.location.origin}/api/backgrounds`)
+        const data2 = await axios.get(`${window.location.origin}/api/tags`)
         setBackgrounds(data.data)
+        setTags(data2.data)
+        console.log(data2)
       } catch {
         setError(true)
       } finally {
@@ -42,6 +46,9 @@ const Backgrounds = () => {
         ) : (
           <>
             <div className="centerit">
+              {tags.map(x => (
+                <a href="#" className={"button"} >{x}</a>
+              ))}
               <p className="text">
                 {page}/{totalPages}
               </p>

@@ -2,19 +2,22 @@ require("dotenv").config()
 const express = require("express")
 const path = require("path")
 const app = express()
+const { json } = require("body-parser")
+app.use(json())
+
 const cloudinary = require("cloudinary")
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 })
-const {Client} = require("discord.js")
-const client = new Client({intents: ["GUILD_MEMBERS"]})
-client.login(process.env.TOKEN)
-
+const { Client } = require("discord.js")
+const client = new Client({ intents: ["GUILD_MEMBERS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] })
 
 const config = {
-  guild: "778894052799545355", staff: "816054426615152661"
+  guild: "778894052799545355",
+  staff: "816054426615152661",
+  prefix: "ab!",
 }
 
 const api = express.Router()
@@ -28,24 +31,50 @@ api.get("/folder", async (req, res) => {
   res.json(root)
 })
 
+api.get("/tags", async (req, res) => {
+  let tagData = await cloudinary.v2.api.tags()
+  res.json(tagData.tags)
+})
+
+api.post("/addtag", async (req, res) => {
+  let done = await cloudinary.v2.uploader.add_tag(req.body.tag, req.body.image, {})
+  res.json(done)
+})
+
 api.get("/backgrounds", async (req, res) => {
   let bg = await cloudinary.v2.search.expression("public_id=amaribackgrounds*").max_results(200).execute()
   let sendData = []
-  bg.resources.forEach(x => {
-    sendData.push({"name": x.filename, "url": x.secure_url, "format": x.format})
+  if (req.query.raw) {
+    sendData = bg.resources
+  } else {
+    bg.resources.forEach((x) => {
+      sendData.push({ name: x.filename, url: x.secure_url, format: x.format })
+    })
+  }
+  res.json(sendData)
+})
+
+api.get("/backgrounds/:tag", async (req, res) => {
+  let bg = await cloudinary.v2.search.expression(`public_id=amaribackgrounds* && tags:${req.params.tag}`).max_results(20000).execute()
+  let sendData = []
+  bg.resources.forEach((x) => {
+    sendData.push({ name: x.filename, url: x.secure_url, format: x.format })
   })
   res.json(sendData)
 })
 
 api.get("/staff", async (req, res) => {
-  let staffIds = client.guilds.resolve(config.guild).members.cache.filter(x => x.roles.cache.has(config.staff)).map(x => x.id)
-  return staffIds
+  let staffIds = client.guilds
+    .resolve(config.guild)
+    .members.cache.filter((x) => x.roles.cache.has(config.staff))
+    .map((x) => x.id)
+  res.json(staffIds)
 })
+
+app.use("/api", api)
 
 app.use(express.static(path.join(__dirname, "client/build")))
 app.use(express.static(path.join(__dirname, "public")))
-
-app.use("/api", api)
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "client/build", "index.html"))
@@ -53,3 +82,40 @@ app.get("/*", function (req, res) {
 
 app.listen(process.env.PORT)
 console.log("AmariBackgrounds has been started, port " + process.env.PORT)
+
+client.on("ready", () => console.log("Discord is connected, using " + client.user.tag))
+
+client.on("messageCreate", async (message) => {
+  console.log(message.content)
+  const args = message.content.slice(config.prefix.length).split(/ +/)
+  const commandName = args.shift().toLowerCase()
+  if (commandName == "eval") {
+    if (!["439223656200273932"].includes(message.author.id)) return
+    try {
+      if (!args[0]) return message.channel.send("undefined", { code: "js" })
+
+      let codeArr = args.slice(0).join(" ").split("\n")
+      if (!codeArr[codeArr.length - 1].startsWith("return")) codeArr[codeArr.length - 1] = `return ${codeArr[codeArr.length - 1]}`
+
+      const code = `async () => { ${codeArr.join("\n")} }`
+
+      let out = await eval(code)()
+
+      message.channel.send(`Typeof output: **${typeof out}**`)
+      if (typeof out !== "string") out = require("util").inspect(out)
+      out = out.replace(process.env.TOKEN, "[TOKEN REDACTED]").replace(process.env.CLOUDINARY_SECRET, "[CLOUDINARY_SECRET REDACTED]")
+
+      message.channel.send({
+        content: out ? out : "null",
+        split: true,
+        code: "js",
+      })
+    } catch (err) {
+      message.channel.send("An error occurred when trying to execute this command.")
+      console.log(err)
+      return message.channel.send(`${err}`, { code: "js" })
+    }
+  }
+})
+
+client.login(process.env.TOKEN)
