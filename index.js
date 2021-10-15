@@ -12,7 +12,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 })
 const { Client } = require("discord.js")
-const client = new Client({ intents: ["GUILD_MEMBERS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] })
+const client = new Client({ intents: ["GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_PRESENCES"] })
 
 const config = {
   guild: "778894052799545355",
@@ -42,32 +42,18 @@ api.post("/addtag", async (req, res) => {
 })
 
 api.get("/backgrounds", async (req, res) => {
-  let bg = await cloudinary.v2.search.expression("public_id=amaribackgrounds*").max_results(200).execute()
-  let sendData = []
-  if (req.query.raw) {
-    sendData = bg.resources
-  } else {
-    bg.resources.forEach((x) => {
-      sendData.push({ name: x.filename, url: x.secure_url, format: x.format })
-    })
-  }
-  res.json(sendData)
-})
-
-api.get("/backgrounds/:tag", async (req, res) => {
-  let bg = await cloudinary.v2.search.expression(`public_id=amaribackgrounds* && tags:${req.params.tag}`).max_results(20000).execute()
+  let bg = await cloudinary.v2.api.resources({ tags: true })
   let sendData = []
   bg.resources.forEach((x) => {
-    sendData.push({ name: x.filename, url: x.secure_url, format: x.format })
+    if (x.public_id.startsWith("amaribackgrounds")) {
+      sendData.push({ name: x.public_id.replace("amaribackgrounds/", ""), url: x.secure_url, format: x.format, tags: x.tags })
+    }
   })
   res.json(sendData)
 })
 
 api.get("/staff", async (req, res) => {
-  let staffIds = client.guilds
-    .resolve(config.guild)
-    .members.cache.filter((x) => x.roles.cache.has(config.staff))
-    .map((x) => x.id)
+  let staffIds = PO
   res.json(staffIds)
 })
 
