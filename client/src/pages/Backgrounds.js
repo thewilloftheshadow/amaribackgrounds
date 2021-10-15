@@ -8,7 +8,8 @@ import usePagination from "../hooks/usePagination"
 
 const Backgrounds = () => {
   const [backgrounds, setBackgrounds] = React.useState([])
-  const [tags, setTags] = React.useState([])
+  const [activeTag, setActiveTag] = React.useState("")
+  const [tags, setTags] = React.useState("")
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } = usePagination({
@@ -46,15 +47,20 @@ const Backgrounds = () => {
         ) : (
           <>
             <div className="centerit">
-              {tags.map(x => (
-                <a href="#" className={"button"} >{x}</a>
+              <a href="#" onClick={() => setActiveTag(null)} className={"button"}>
+                View All
+              </a>
+              {tags.map((x) => (
+                <a href="#" onClick={() => setActiveTag(x)} className={"button"}>
+                  {x}
+                </a>
               ))}
               <p className="text">
                 {page}/{totalPages}
               </p>
 
               <nav aria-label="Page Selector">
-                <ul class="pagination" style={{justifyContent: "center"}} >
+                <ul class="pagination" style={{ justifyContent: "center" }}>
                   <li class="page-item">
                     <a class="page-link" aria-label="Previous" href="#" onClick={prevPage} className={`page ${page === 1 && "disabled"}`}>
                       <span aria-hidden="true">&laquo;</span>
@@ -77,12 +83,15 @@ const Backgrounds = () => {
             </div>
             <div className="items">
               {console.log(backgrounds)}
-              {backgrounds.slice(firstContentIndex, lastContentIndex)?.map((el) => (
-                <div>
-                  <p>{el.name}</p>
-                  <img src={el.url}></img>
-                </div>
-              ))}
+              {backgrounds
+                .filter((x) => (activeTag ? x.tags.includes(activeTag) : x))
+                .slice(firstContentIndex, lastContentIndex)
+                ?.map((el) => (
+                  <div>
+                    <p>{el.name}</p>
+                    <img src={el.url}></img>
+                  </div>
+                ))}
             </div>
           </>
         )}

@@ -53,7 +53,7 @@ api.get("/backgrounds", async (req, res) => {
 })
 
 api.get("/staff", async (req, res) => {
-  let staffIds = PO
+  let staffIds = client.guilds.resolve(config.guild).members.cache.filter((x) => x.roles.cache.has(config.staff)).map((x) => x.id)
   res.json(staffIds)
 })
 
