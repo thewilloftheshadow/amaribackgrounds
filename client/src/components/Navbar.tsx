@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav style={{backgroundColor: "black"}} className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-end">
           <div className="navbar-item">
             {window.supabase.auth.user() ? (
