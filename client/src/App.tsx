@@ -1,7 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { createClient, SupabaseClient } from "@supabase/supabase-js"
-import axios from 'axios';
 
 // Pages
 import Home from "./pages/Home"

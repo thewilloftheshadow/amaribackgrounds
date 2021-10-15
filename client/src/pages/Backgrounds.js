@@ -4,23 +4,28 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import axios from "axios"
 import React from "react"
+import usePagination from "../hooks/usePagination"
 
 const Backgrounds = () => {
-  const [projectData, setProjectData] = React.useState(undefined)
-  if (!projectData) {
-    axios({
-      method: "GET",
-      url: `${window.location.origin}/api/backgrounds`,
-    })
-      .then((data) => {
-        console.log(data)
-        setProjectData(JSON.parse(data.request.response))
-      })
-      .catch((error) => {
-        console.error(error)
-        setProjectData(null)
-      })
-  }
+  const [backgrounds, setBackgrounds] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState(false)
+  const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } = usePagination({
+    contentPerPage: 10,
+    count: backgrounds.length,
+  })
+  React.useEffect(() => {
+    ;(async () => {
+      try {
+        const data = await axios.get(`${window.location.origin}/api/backgrounds`)
+        setBackgrounds(data.data)
+      } catch {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
+    })()
+  }, [])
   return (
     <div>
       <Helmet>
@@ -29,24 +34,52 @@ const Backgrounds = () => {
 
       <Navbar />
 
-      <div className="container text-centered">
-          {
-            projectData?.length ?
-            projectData.map((p) => (
-              <div><p>{p.name}</p><img src={p.url}></img></div>
-            )) : projectData === null ? (
-              <div>
-                <p className="has-text-danger">
-                  Failed to fetch background data
-                </p>
-              </div>
-            ) : (
-              <p>
-                Loading backgrounds data...
+      <div className="container">
+        {loading ? (
+          <p className="text-centered">Loading backgrounds data...</p>
+        ) : error ? (
+          <p className="has-text-danger text-centered">Failed to fetch background data</p>
+        ) : (
+          <>
+            <div className="centerit">
+              <p className="text">
+                {page}/{totalPages}
               </p>
-            )
-          }
-        </div>
+
+              <nav aria-label="Page Selector">
+                <ul class="pagination" style={{justifyContent: "center"}} >
+                  <li class="page-item">
+                    <a class="page-link" aria-label="Previous" href="#" onClick={prevPage} className={`page ${page === 1 && "disabled"}`}>
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  {[...Array(totalPages).keys()].map((el) => (
+                    <li class="page-item">
+                      <a onClick={() => setPage(el + 1)} key={el} className={(`page ${page === el + 1 ? "active" : ""}`, "page-link")} href="#">
+                        {el + 1}
+                      </a>
+                    </li>
+                  ))}
+                  <li class="page-item">
+                    <a class="page-link" aria-label="Next" href="#" onClick={nextPage} className={`page ${page === totalPages && "disabled"}`}>
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className="items">
+              {console.log(backgrounds)}
+              {backgrounds.slice(firstContentIndex, lastContentIndex)?.map((el) => (
+                <div>
+                  <p>{el.name}</p>
+                  <img src={el.url}></img>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
 
       <Footer />
     </div>

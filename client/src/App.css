@@ -18,6 +18,10 @@
   text-align: center;
 }
 
+.centerit {
+  justify-content: center;
+}
+
 
 .dash-menu {
   position: sticky;

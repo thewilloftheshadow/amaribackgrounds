@@ -3,7 +3,7 @@ import 'bulma';
 import '../App.css';
 //import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Footer = () => {
   return (
     <div style={{ paddingTop: '50px' }}>
       {/* <section className="hero is-small is-blurple">
@@ -56,5 +56,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Footer;
 
