@@ -1,12 +1,43 @@
 .is-amariYellow {
-  background-color: #FBEAAF;
+  background-color: #fbeaaf;
   border-color: transparent;
-  color: #70503C;
+  color: #70503c;
+}
+.is-amariYellow:hover {
+  background-color: #70503c;
+  border-color: transparent;
+  color: #fbeaaf;
+  z-index: 2;
+}
+.is-amariYellow:focus {
+  background-color: #70503c;
+  border-color: transparent;
+  color: #fbeaaf;
+  z-index: 3;
+}
+.is-amariYellow.active {
+  background-color: #70503c;
+  border-color: transparent;
+  color: #fbeaaf;
+  z-index: 3;
 }
 .is-amariBrown {
-  background-color: #70503C;
+  background-color: #70503c;
   border-color: transparent;
-  color: #fff;
+  color: #fbeaaf;
+}
+
+.amariBrown {
+  color: #70503c;
+}
+
+.amariYellow {
+  color: #fbeaaf;
+}
+
+.darkbg {
+  background-color: rgb(57, 57, 57);
+  color: white;
 }
 
 .home-button {
@@ -21,7 +52,6 @@
 .centerit {
   justify-content: center;
 }
-
 
 .dash-menu {
   position: sticky;

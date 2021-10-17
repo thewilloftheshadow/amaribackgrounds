@@ -47,10 +47,13 @@ const Backgrounds = () => {
         ) : (
           <>
             <div className="centerit">
+              {/* eslint-disable-next-line */}
               <a href="#" onClick={() => setActiveTag(null)} className={"button"}>
                 View All
               </a>
+
               {tags.map((x) => (
+                /* eslint-disable-next-line */
                 <a href="#" onClick={() => setActiveTag(x)} className={"button"}>
                   {x}
                 </a>
@@ -62,19 +65,22 @@ const Backgrounds = () => {
               <nav aria-label="Page Selector">
                 <ul class="pagination" style={{ justifyContent: "center" }}>
                   <li class="page-item">
-                    <a aria-label="Previous" href="#" onClick={prevPage} className={"page-link"} disabled={`${page === 1 ? "disabled" : ""}`}>
+                    {/* eslint-disable-next-line */}
+                    <a aria-label="Previous" href="#" onClick={prevPage} className={"page-link is-amariYellow"}>
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   {[...Array(totalPages).keys()].map((el) => (
                     <li class="page-item">
-                      <a onClick={() => setPage(el + 1)} key={el} className={(`page ${page === el + 1 ? "active" : ""}`, "page-link")} href="#">
+                      {/* eslint-disable-next-line */}
+                      <a onClick={() => setPage(el + 1)} key={el} className={`page ${page === el + 1 ? "active" : ""} page-link is-amariYellow`} href="#">
                         {el + 1}
                       </a>
                     </li>
                   ))}
                   <li class="page-item">
-                    <a aria-label="Next" href="#" onClick={nextPage} className={"page-link"} disabled={`${page === totalPages ? "disabled" : ""}`}>
+                    {/* eslint-disable-next-line */}
+                    <a aria-label="Next" href="#" onClick={nextPage} className={"page-link is-amariYellow"}>
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -89,7 +95,7 @@ const Backgrounds = () => {
                 ?.map((el) => (
                   <div>
                     <p>{el.name}</p>
-                    <img src={el.url}></img>
+                    <img alt={el.name} src={el.url}></img>
                   </div>
                 ))}
             </div>

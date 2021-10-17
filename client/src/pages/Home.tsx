@@ -17,7 +17,7 @@ const Home = () => {
 
             <Navbar />
 
-            <div style={{ maxWidth: "60rem", margin: "auto", textAlign: "center" }}>
+            <div style={{ maxWidth: "60rem", margin: "auto", textAlign: "center"}}>
                 <br />
                 <br />
 
@@ -27,11 +27,11 @@ const Home = () => {
                     </figure>
                     <br />
                     <span style={{ marginRight: "20px" }} />
-                    AmariBackgrounds
+                    <span style={{color: "white"}}>AmariBackgrounds</span>
                 </h1>
 
                 <p>
-                    <strong>AmariBackgrounds</strong> is a collection of backgrounds for AmariBot. We have over 200 Backgrounds and we get more almost everyday! Join our AmariBackground Discord Server below to submit your own!
+                    AmariBackgrounds is a collection of backgrounds for AmariBot. We have over 200 Backgrounds and we get more almost everyday! Join our AmariBackground Discord Server below to submit your own!
                 </p>
 
                 <br />
