@@ -74,8 +74,7 @@ app.listen(process.env.PORT)
 console.log("AmariBackgrounds has been started, port " + process.env.PORT)
 
 client.on("ready", () => {
-  let commit = require("child_process").execSync("git rev-parse --short HEAD").toString().trim()
-  if (process.env.TERM_PROGRAM != "vscode") webLog(`Process start complete: https://amaribackgrounds.theshadow.xyz\n\`\`\`diff\n+ Commit: ${commit}\n- Port: ${process.env.PORT}\n- User: ${client.user.tag}\`\`\``)
+  if (process.env.TERM_PROGRAM != "vscode") webLog(`Process start complete: https://amaribackgrounds.theshadow.xyz\n\`\`\`diff\n- Port: ${process.env.PORT}\n- User: ${client.user.tag}\`\`\``)
   console.log("Discord is connected, using " + client.user.tag)
 })
 
