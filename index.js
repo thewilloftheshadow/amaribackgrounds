@@ -11,13 +11,14 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 })
-const { Client } = require("discord.js")
+const { Client, Util } = require("discord.js")
 const client = new Client({ intents: ["GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_PRESENCES"] })
 
 const config = {
   guild: "778894052799545355",
   staff: "816054426615152661",
   prefix: "ab!",
+  logs: "899428253847138305",
 }
 
 const api = express.Router()
@@ -53,7 +54,10 @@ api.get("/backgrounds", async (req, res) => {
 })
 
 api.get("/staff", async (req, res) => {
-  let staffIds = client.guilds.resolve(config.guild).members.cache.filter((x) => x.roles.cache.has(config.staff)).map((x) => x.id)
+  let staffIds = client.guilds
+    .resolve(config.guild)
+    .members.cache.filter((x) => x.roles.cache.has(config.staff))
+    .map((x) => x.id)
   res.json(staffIds)
 })
 
@@ -69,7 +73,11 @@ app.get("/*", function (req, res) {
 app.listen(process.env.PORT)
 console.log("AmariBackgrounds has been started, port " + process.env.PORT)
 
-client.on("ready", () => console.log("Discord is connected, using " + client.user.tag))
+client.on("ready", () => {
+  let commit = require("child_process").execSync("git rev-parse --short HEAD").toString().trim()
+  if (process.env.TERM_PROGRAM != "vscode") webLog(`Process start complete: https://amaribackgrounds.theshadow.xyz\n\`\`\`diff\n+ Commit: ${commit}\n- Port: ${process.env.PORT}\n- User: ${client.user.tag}\`\`\``)
+  console.log("Discord is connected, using " + client.user.tag)
+})
 
 client.on("messageCreate", async (message) => {
   console.log(message.content)
@@ -105,3 +113,7 @@ client.on("messageCreate", async (message) => {
 })
 
 client.login(process.env.TOKEN)
+
+const webLog = (msg) => {
+  client.channels.cache.get(config.logs).send({ content: Util.cleanContent(msg) })
+}

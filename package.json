@@ -6,7 +6,8 @@
     "dev": "REACT_APP_ENVIRONMENT=development cd client && node scripts/start.js",
     "build": "cd client && node scripts/build.js",
     "test": "node client/scripts/test.js",
-    "start": "npm run build && node index.js"
+    "start": "npm run build && node index.js",
+    "x": "PORT=3000 npm run build && node index.js"
   },
   "dependencies": {
     "@babel/core": "7.12.3",
