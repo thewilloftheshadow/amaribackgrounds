@@ -62,7 +62,7 @@ const Backgrounds = () => {
               <nav aria-label="Page Selector">
                 <ul class="pagination" style={{ justifyContent: "center" }}>
                   <li class="page-item">
-                    <a class="page-link" aria-label="Previous" href="#" onClick={prevPage} className={`page ${page === 1 && "disabled"}`}>
+                    <a aria-label="Previous" href="#" onClick={prevPage} className={"page-link"} disabled={`${page === 1 ? "disabled" : ""}`}>
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
@@ -74,7 +74,7 @@ const Backgrounds = () => {
                     </li>
                   ))}
                   <li class="page-item">
-                    <a class="page-link" aria-label="Next" href="#" onClick={nextPage} className={`page ${page === totalPages && "disabled"}`}>
+                    <a aria-label="Next" href="#" onClick={nextPage} className={"page-link"} disabled={`${page === totalPages ? "disabled" : ""}`}>
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -82,7 +82,7 @@ const Backgrounds = () => {
               </nav>
             </div>
             <div className="items">
-              {console.log(backgrounds)}
+              {console.log(backgrounds, activeTag)}
               {backgrounds
                 .filter((x) => (activeTag ? x.tags.includes(activeTag) : x))
                 .slice(firstContentIndex, lastContentIndex)

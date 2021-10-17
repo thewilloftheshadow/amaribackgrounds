@@ -42,7 +42,7 @@ api.post("/addtag", async (req, res) => {
 })
 
 api.get("/backgrounds", async (req, res) => {
-  let bg = await cloudinary.v2.api.resources({ tags: true })
+  let bg = await cloudinary.v2.api.resources({ tags: true, max_results: 500 })
   let sendData = []
   bg.resources.forEach((x) => {
     if (x.public_id.startsWith("amaribackgrounds")) {
