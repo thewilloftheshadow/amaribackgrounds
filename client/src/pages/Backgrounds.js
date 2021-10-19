@@ -9,8 +9,6 @@ import usePagination from "../hooks/usePagination"
 const Backgrounds = ({ match, location }) => {
   console.log(match, location)
   const [backgrounds, setBackgrounds] = React.useState([])
-  const [activeTag, setActiveTag] = React.useState("")
-  const [tags, setTags] = React.useState("")
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } = usePagination({
@@ -22,17 +20,14 @@ const Backgrounds = ({ match, location }) => {
       try {
         console.log(`${window.location.origin}/api/backgrounds${match.params.tag ? `?tag=${match.params.tag}` : ""}`)
         const data = await axios.get(`${window.location.origin}/api/backgrounds${match.params.tag ? `?tag=${match.params.tag}` : ""}`)
-        const data2 = await axios.get(`${window.location.origin}/api/tags`)
         setBackgrounds(data.data)
-        setTags(data2.data)
-        console.log(data2)
       } catch {
         setError(true)
       } finally {
         setLoading(false)
       }
     })()
-  }, [])
+  }, [match.params.tag])
   return (
     <div>
       <Helmet>
@@ -49,17 +44,6 @@ const Backgrounds = ({ match, location }) => {
         ) : (
           <>
             <div className="centerit">
-              {/* eslint-disable-next-line */}
-              <a href="/backgrounds" onClick={() => setActiveTag(null)} className={"button"}>
-                View All
-              </a>
-              {console.log(tags, activeTag)}
-              {tags.map((x) => (
-                /* eslint-disable-next-line */
-                <a href={`/backgrounds/${x}`} onClick={() => setActiveTag(x)} className={"button"}>
-                  {x}
-                </a>
-              ))}
               <p className="text">
                 {page}/{totalPages}
               </p>
@@ -90,15 +74,12 @@ const Backgrounds = ({ match, location }) => {
               </nav>
             </div>
             <div className="items">
-              {console.log(backgrounds, activeTag)}
-              {backgrounds
-                .slice(firstContentIndex, lastContentIndex)
-                ?.map((el) => (
-                  <div>
-                    <p>{el.name}</p>
-                    <img alt={el.name} src={el.url}></img>
-                  </div>
-                ))}
+              {backgrounds.slice(firstContentIndex, lastContentIndex)?.map((el) => (
+                <div>
+                  <p>{el.name}</p>
+                  <img alt={el.name} src={el.url}></img>
+                </div>
+              ))}
             </div>
           </>
         )}

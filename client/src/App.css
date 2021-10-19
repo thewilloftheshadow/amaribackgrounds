@@ -31,6 +31,14 @@
   color: #70503c;
 }
 
+.navbar-link:not(.is-arrowless)::after {
+  border-color: #fbeaaf;
+}
+
+.white {
+  color: white;
+}
+
 .amariYellow {
   color: #fbeaaf;
 }
@@ -43,6 +51,10 @@
 .home-button {
   margin-left: 5px;
   width: 250px;
+}
+
+.title {
+  color: white;
 }
 
 .text-n {
