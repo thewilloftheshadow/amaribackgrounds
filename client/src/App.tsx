@@ -32,6 +32,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/backgrounds" component={Backgrounds} />
+        <Route path="/backgrounds/:tag" component={Backgrounds} />
         <Route exact path="/manage" component={ComingSoon} />
         <Route exact path="/upload" component={ComingSoon} />
         <Route component={NotFound} />

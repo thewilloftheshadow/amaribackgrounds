@@ -6,7 +6,8 @@ import axios from "axios"
 import React from "react"
 import usePagination from "../hooks/usePagination"
 
-const Backgrounds = () => {
+const Backgrounds = ({ match, location }) => {
+  console.log(match, location)
   const [backgrounds, setBackgrounds] = React.useState([])
   const [activeTag, setActiveTag] = React.useState("")
   const [tags, setTags] = React.useState("")
@@ -19,7 +20,8 @@ const Backgrounds = () => {
   React.useEffect(() => {
     ;(async () => {
       try {
-        const data = await axios.get(`${window.location.origin}/api/backgrounds`)
+        console.log(`${window.location.origin}/api/backgrounds${match.params.tag ? `?tag=${match.params.tag}` : ""}`)
+        const data = await axios.get(`${window.location.origin}/api/backgrounds${match.params.tag ? `?tag=${match.params.tag}` : ""}`)
         const data2 = await axios.get(`${window.location.origin}/api/tags`)
         setBackgrounds(data.data)
         setTags(data2.data)
@@ -48,13 +50,13 @@ const Backgrounds = () => {
           <>
             <div className="centerit">
               {/* eslint-disable-next-line */}
-              <a href="#" onClick={() => setActiveTag(null)} className={"button"}>
+              <a href="/backgrounds" onClick={() => setActiveTag(null)} className={"button"}>
                 View All
               </a>
-
+              {console.log(tags, activeTag)}
               {tags.map((x) => (
                 /* eslint-disable-next-line */
-                <a href="#" onClick={() => setActiveTag(x)} className={"button"}>
+                <a href={`/backgrounds/${x}`} onClick={() => setActiveTag(x)} className={"button"}>
                   {x}
                 </a>
               ))}
@@ -90,7 +92,6 @@ const Backgrounds = () => {
             <div className="items">
               {console.log(backgrounds, activeTag)}
               {backgrounds
-                .filter((x) => (activeTag ? x.tags.includes(activeTag) : x))
                 .slice(firstContentIndex, lastContentIndex)
                 ?.map((el) => (
                   <div>

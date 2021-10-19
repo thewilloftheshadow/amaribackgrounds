@@ -37,17 +37,23 @@ api.get("/tags", async (req, res) => {
   res.json(tagData.tags)
 })
 
-api.post("/addtag", async (req, res) => {
-  let done = await cloudinary.v2.uploader.add_tag(req.body.tag, req.body.image, {})
-  res.json(done)
-})
+// api.post("/addtag", async (req, res) => {
+//   let done = await cloudinary.v2.uploader.add_tag(req.body.tag, req.body.image, {})
+//   res.json(done)
+// })
 
 api.get("/backgrounds", async (req, res) => {
-  let bg = await cloudinary.v2.api.resources({ tags: true, max_results: 500 })
+  let bg
+  if (req.query.tag) {
+    bg = await cloudinary.v2.api.resources_by_tag(req.query.tag, { tags: true, max_results: 500 })
+  } else {
+    bg = await cloudinary.v2.api.resources({ tags: true, max_results: 500 })
+  }
   let sendData = []
   bg.resources.forEach((x) => {
+    x
     if (x.public_id.startsWith("amaribackgrounds")) {
-      sendData.push({ name: x.public_id.replace("amaribackgrounds/", ""), url: x.secure_url, format: x.format, tags: x.tags })
+      sendData.push(req.query.raw ? x : { name: x.public_id.replace("amaribackgrounds/", ""), url: x.secure_url, format: x.format, tags: x.tags })
     }
   })
   res.json(sendData)
