@@ -32,21 +32,30 @@ const Navbar = () => {
                 Home
               </a>
             </li>
+            <li className="nav-item active">
+              <a className="nav-link" href="/backgrounds">
+                Backgrounds
+              </a>
+            </li>
             <li className="nav-item dropdown">
               {/* eslint-disable-next-line */}
-              <a className="nav-link dropdown-toggle white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" style={{ color: "white" }} href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Tags
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a href="/backgrounds" className={"dropdown-item white"}>
-                  View All
-                </a>
-                {tags.map((x) => (
+                {(tags && tags.length > 0) ? (
+                  tags.map((x) => (
+                    /* eslint-disable-next-line */
+                    <a href={`/backgrounds/${x}`} className={"dropdown-item white"}>
+                      {x}
+                    </a>
+                  ))
+                ) : (
                   /* eslint-disable-next-line */
-                  <a href={`/backgrounds/${x}`} className={"dropdown-item white"}>
-                    {x}
+                  <a href="#" className={"dropdown-item white"}>
+                    No tags found
                   </a>
-                ))}
+                )}
               </div>
             </li>
           </ul>

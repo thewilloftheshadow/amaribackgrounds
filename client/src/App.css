@@ -61,8 +61,13 @@
   text-align: center;
 }
 
+.itemthing img {
+  cursor: pointer;
+}
+
 .centerit {
   justify-content: center;
+  text-align: center;
 }
 
 .dash-menu {

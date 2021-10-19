@@ -5,6 +5,7 @@ import Footer from "../components/Footer"
 import axios from "axios"
 import React from "react"
 import usePagination from "../hooks/usePagination"
+import { saveAs } from "file-saver"
 
 const Backgrounds = ({ match, location }) => {
   console.log(match, location)
@@ -12,7 +13,7 @@ const Backgrounds = ({ match, location }) => {
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } = usePagination({
-    contentPerPage: 10,
+    contentPerPage: 12,
     count: backgrounds.length,
   })
   React.useEffect(() => {
@@ -44,11 +45,9 @@ const Backgrounds = ({ match, location }) => {
         ) : (
           <>
             <div className="centerit">
-              <p className="text">
-                {page}/{totalPages}
-              </p>
+              <p className="h3 centerit pb-3">{match.params.tag ? `${match.params.tag.charAt(0).toUpperCase() + match.params.tag.slice(1)} Backgrounds` : `All Backgrounds`}</p>
 
-              <nav aria-label="Page Selector">
+              <nav aria-label="Page Selector" className="pb-3">
                 <ul class="pagination" style={{ justifyContent: "center" }}>
                   <li class="page-item">
                     {/* eslint-disable-next-line */}
@@ -73,19 +72,31 @@ const Backgrounds = ({ match, location }) => {
                 </ul>
               </nav>
             </div>
-            <div className="items">
-              {backgrounds.slice(firstContentIndex, lastContentIndex)?.map((el) => (
-                <div>
-                  <p>{el.name}</p>
-                  <img alt={el.name} src={el.url}></img>
-                </div>
-              ))}
+            <div className="items container">
+              <div class="row">
+                {backgrounds.slice(firstContentIndex, lastContentIndex)?.map((el) => (
+                  <ImageItem item={el} />
+                ))}
+              </div>
             </div>
           </>
         )}
       </div>
 
       <Footer />
+    </div>
+  )
+}
+
+const ImageItem = (el) => {
+  const downloadImage = () => {
+    saveAs(el.item.url, "download.png") // Put your image url here.
+  }
+
+  return (
+    <div className="col-4 centerit itemthing">
+      <p className="h5">{el.item.name}</p>
+      <img onClick={downloadImage} alt={el.item.name} src={el.item.url}></img>
     </div>
   )
 }
