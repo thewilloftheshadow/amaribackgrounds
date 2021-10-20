@@ -94,7 +94,7 @@ const ImageItem = (el) => {
   }
 
   return (
-    <div className="col-4 centerit itemthing">
+    <div className="col-12 col-md-6 col-lg-4 centerit itemthing">
       <p className="h5">{el.item.name}</p>
       <img onClick={downloadImage} alt={el.item.name} src={el.item.url}></img>
     </div>
