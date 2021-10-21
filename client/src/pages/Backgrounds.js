@@ -6,7 +6,7 @@ import axios from "axios"
 import React from "react"
 import usePagination from "../hooks/usePagination"
 import { saveAs } from "file-saver"
-import { Modal, Button, Container, Row } from "react-bootstrap"
+
 
 const Backgrounds = ({ match, location }) => {
   const [backgrounds, setBackgrounds] = React.useState([])
@@ -37,7 +37,7 @@ const Backgrounds = ({ match, location }) => {
 
       <TopNav />
 
-      <Container>
+      <div class="container">
         {loading ? (
           <p className="text-centered">Loading backgrounds data...</p>
         ) : error ? (
@@ -72,16 +72,16 @@ const Backgrounds = ({ match, location }) => {
                 </ul>
               </nav>
             </div>
-            <Container className="items">
-              <Row>
+            <div className="container items">
+              <div class="row">
                 {backgrounds.slice(firstContentIndex, lastContentIndex)?.map((el) => (
                   <ImageItem item={el} />
                 ))}
-              </Row>
-            </Container>
+              </div>
+            </div>
           </>
         )}
-      </Container>
+      </div>
 
       <Footer />
     </div>
@@ -93,30 +93,38 @@ const ImageItem = (el) => {
     saveAs(el.item.url, "download.png") // Put your image url here.
   }
 
-  const [show, setShow] = React.useState(false)
-
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClick = () => {
+    console.log("modal-" + el.item.name)
+    $("modal" + el.item.name).modal("show")
+  }
 
   return (
     <div className="col-12 col-md-6 col-lg-4 centerit itemthing pt-3">
       {/* <p className="h5">{el.item.title || el.item.name}</p> */}
-      <img onClick={handleShow} alt={el.item.title || el.item.name} src={el.item.url}></img>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{el.item.title || el.item.name}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body><img alt={el.item.title || el.item.name} src={el.item.url}></img></Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={downloadImage}>
-            Download
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <img onClick={handleClick} alt={el.item.title || el.item.name} src={el.item.url}></img>
+      <div class="modal fade" id={"modal-" + el.item.name} tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{el.item.title || el.item.name}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img alt={el.item.title || el.item.name} src={el.item.url}></img>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <button onClick={downloadImage} type="button" class="btn btn-primary">
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
