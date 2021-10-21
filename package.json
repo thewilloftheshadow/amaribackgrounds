@@ -7,7 +7,7 @@
     "build": "cd client && node scripts/build.js",
     "test": "node client/scripts/test.js",
     "start": "npm run build && node index.js",
-    "x": "PORT=3000 npm run build && node index.js"
+    "x": "npm run build && PORT=3000 TEST=yes nodemon index.js"
   },
   "dependencies": {
     "@babel/core": "7.12.3",
@@ -67,6 +67,7 @@
     "prompts": "2.4.0",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
+    "react-bootstrap": "^1.6.4",
     "react-dev-utils": "^11.0.3",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",

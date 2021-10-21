@@ -1,17 +1,18 @@
 import "bulma"
 import { Helmet } from "react-helmet"
-import Navbar from "../components/Navbar"
+import TopNav from "../components/Navbar"
 import Footer from "../components/Footer"
 import axios from "axios"
 import React from "react"
 import usePagination from "../hooks/usePagination"
 import { saveAs } from "file-saver"
+import { Modal, Button, Container, Row } from "react-bootstrap"
 
 const Backgrounds = ({ match, location }) => {
-  console.log(match, location)
   const [backgrounds, setBackgrounds] = React.useState([])
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
+
   const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, setPage, totalPages } = usePagination({
     contentPerPage: 12,
     count: backgrounds.length,
@@ -19,7 +20,6 @@ const Backgrounds = ({ match, location }) => {
   React.useEffect(() => {
     ;(async () => {
       try {
-        console.log(`${window.location.origin}/api/backgrounds${match.params.tag ? `?tag=${match.params.tag}` : ""}`)
         const data = await axios.get(`${window.location.origin}/api/backgrounds${match.params.tag ? `?tag=${match.params.tag}` : ""}`)
         setBackgrounds(data.data)
       } catch {
@@ -35,9 +35,9 @@ const Backgrounds = ({ match, location }) => {
         <title>All Backgrounds | AmariBackgrounds</title>
       </Helmet>
 
-      <Navbar />
+      <TopNav />
 
-      <div className="container">
+      <Container>
         {loading ? (
           <p className="text-centered">Loading backgrounds data...</p>
         ) : error ? (
@@ -72,16 +72,16 @@ const Backgrounds = ({ match, location }) => {
                 </ul>
               </nav>
             </div>
-            <div className="items container">
-              <div class="row">
+            <Container className="items">
+              <Row>
                 {backgrounds.slice(firstContentIndex, lastContentIndex)?.map((el) => (
                   <ImageItem item={el} />
                 ))}
-              </div>
-            </div>
+              </Row>
+            </Container>
           </>
         )}
-      </div>
+      </Container>
 
       <Footer />
     </div>
@@ -93,10 +93,30 @@ const ImageItem = (el) => {
     saveAs(el.item.url, "download.png") // Put your image url here.
   }
 
+  const [show, setShow] = React.useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
   return (
     <div className="col-12 col-md-6 col-lg-4 centerit itemthing pt-3">
       {/* <p className="h5">{el.item.title || el.item.name}</p> */}
-      <img onClick={downloadImage} alt={el.item.title || el.item.name} src={el.item.url}></img>
+      <img onClick={handleShow} alt={el.item.title || el.item.name} src={el.item.url}></img>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{el.item.title || el.item.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><img alt={el.item.title || el.item.name} src={el.item.url}></img></Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={downloadImage}>
+            Download
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

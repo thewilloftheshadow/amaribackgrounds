@@ -57,6 +57,10 @@
   color: white;
 }
 
+.fade {
+  display: hidden;
+}
+
 .text-n {
   text-align: center;
 }

@@ -116,7 +116,12 @@ client.on("messageCreate", async (message) => {
   }
 })
 
-client.login(process.env.TOKEN)
+setTimeout(
+  () => {
+    client.login(process.env.TOKEN)
+  },
+  process.env.TEST == "yes" ? 20000 : 1000
+)
 
 const webLog = (msg) => {
   client.channels.cache.get(config.logs).send({ content: Util.cleanContent(msg) })

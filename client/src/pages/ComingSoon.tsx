@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bulma';
 import { Helmet } from 'react-helmet';
-import Navbar from '../components/Navbar';
+import TopNav from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ComingSoon = () => {
@@ -11,7 +11,7 @@ const ComingSoon = () => {
         <title>Coming Soon | AmariBackgrounds</title>
       </Helmet>
 
-      <Navbar />
+      <TopNav />
       
       <div style={{ height: '100px' }} />
 

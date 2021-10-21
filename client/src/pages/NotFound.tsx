@@ -1,8 +1,8 @@
-import React from 'react';
-import 'bulma';
-import { Helmet } from 'react-helmet';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React from "react"
+import "bulma"
+import { Helmet } from "react-helmet"
+import TopNav from "../components/Navbar"
+import Footer from "../components/Footer"
 
 const NotFound = () => {
   return (
@@ -11,23 +11,25 @@ const NotFound = () => {
         <title>404 Not Found | AmariBackgrounds</title>
       </Helmet>
 
-      <Navbar />
-      
-      <div style={{ height: '100px' }} />
+      <TopNav />
 
-      <h1 className="is-1 title" style={{ textAlign: 'center' }}>404 Not Found</h1>
+      <div style={{ height: "100px" }} />
 
-      <p style={{ textAlign: 'center' }}>
+      <h1 className="is-1 title white" style={{ textAlign: "center" }}>
+        404 Not Found
+      </h1>
+
+      <p style={{ textAlign: "center" }}>
         The requested resource has been moved, deleted, or never existed in the first place. Could it be a typo?
         <br />
         If you came here from a link on this website, please report this bug in our Discord server. Sorry for any inconveniences caused.
       </p>
 
-      <div style={{ height: '100px' }} />
+      <div style={{ height: "100px" }} />
 
       <Footer />
     </div>
   )
-};
+}
 
-export default NotFound;
+export default NotFound

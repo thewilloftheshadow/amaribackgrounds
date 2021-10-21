@@ -3,7 +3,7 @@ import "bulma"
 import "../App.css"
 import { Helmet } from "react-helmet"
 import Footer from "../components/Footer"
-import Navbar from "../components/Navbar"
+import TopNav from "../components/Navbar"
 
 const Home = () => {
     //const [projectData, setProjectData] = React.useState<any>(undefined);
@@ -15,7 +15,7 @@ const Home = () => {
                 <meta name="theme-color" content="#70503C" media="(prefers-color-scheme: dark)"></meta>
             </Helmet>
 
-            <Navbar />
+            <TopNav />
 
             <div style={{ maxWidth: "60rem", margin: "auto", textAlign: "center"}}>
                 <br />
