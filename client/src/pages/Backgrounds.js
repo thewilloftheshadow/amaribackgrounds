@@ -95,7 +95,7 @@ const ImageItem = (el) => {
 
   const handleClick = () => {
     console.log("modal-" + el.item.name)
-    $("modal" + el.item.name).modal("show")
+    //$("modal" + el.item.name).modal("show")
   }
 
   return (
