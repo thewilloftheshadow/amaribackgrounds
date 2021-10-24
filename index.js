@@ -79,7 +79,7 @@ app.listen(process.env.PORT)
 console.log("AmariBackgrounds has been started, port " + process.env.PORT)
 
 client.on("ready", () => {
-  if (process.env.TERM_PROGRAM != "vscode") webLog(`Process start complete: https://amaribackgrounds.theshadow.xyz\n\`\`\`diff\n- Port: ${process.env.PORT}\n- User: ${client.user.tag}${process.env.RAILWAY_GIT_COMMIT_MESSAGE ? `\n- Commit: ${process.env.RAILWAY_GIT_COMMIT_MESSAGE} (${process.env.RAILWAY_GIT_COMMIT_SHA})` : ""}}\`\`\``)
+  if (process.env.TERM_PROGRAM != "vscode") webLog(`Process start complete: https://amaribackgrounds.theshadow.xyz\n\`\`\`diff\n- Port: ${process.env.PORT}\n- User: ${client.user.tag}${process.env.RAILWAY_GIT_COMMIT_MESSAGE ? `\n- Commit: ${process.env.RAILWAY_GIT_COMMIT_MESSAGE} (${process.env.RAILWAY_GIT_COMMIT_SHA})` : ""}\`\`\``)
   console.log("Discord is connected, using " + client.user.tag)
 })
 
