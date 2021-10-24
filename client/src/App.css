@@ -39,6 +39,10 @@
   color: white;
 }
 
+.white.dropdown-item:hover {
+  color: black;
+}
+
 .amariYellow {
   color: #fbeaaf;
 }

@@ -64,7 +64,7 @@ const TopNav = () => {
                 {tags && tags.length > 0 ? (
                   tags.map((x) => (
                     /* eslint-disable-next-line */
-                    <a href={`/backgrounds/${x}`} className={"dropdown-item"}>
+                    <a href={`/backgrounds/${x}`} className={"dropdown-item white"}>
                       {x}
                     </a>
                   ))
