@@ -37,42 +37,42 @@ const TopNav = () => {
           </Navbar.Collapse>
       </Navbar> */}
       <nav className="navbar navbar-expand-lg navbar-dark darkbg" role="navigation" aria-label="main navigation">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           <img src="/AmariSmol.png" style={{ height: "75px", padding: "10px" }} className="d-inline-block align-top" alt=""></img>
-        </a>
+        </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="/">
+              <Link className="nav-link" to="/">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item active">
-              <a className="nav-link" href="/backgrounds">
+              <Link className="nav-link" to="/backgrounds">
                 Backgrounds
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
               {/* eslint-disable-next-line */}
-              <a className="nav-link dropdown-toggle" style={{ color: "white" }} href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <Link className="nav-link dropdown-toggle" style={{ color: "white" }} to="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Tags
-              </a>
+              </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 {tags && tags.length > 0 ? (
                   tags.map((x) => (
                     /* eslint-disable-next-line */
-                    <a href={`/backgrounds/${x}`} className={"dropdown-item white"}>
+                    <Link to={`/backgrounds/${x}`} className={"dropdown-item white"}>
                       {x}
-                    </a>
+                    </Link>
                   ))
                 ) : (
                   /* eslint-disable-next-line */
-                  <a href="#" className={"dropdown-item white"}>
+                  <Link to="#" className={"dropdown-item white"}>
                     No tags found
-                  </a>
+                  </Link>
                 )}
               </div>
             </li>

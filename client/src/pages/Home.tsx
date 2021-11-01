@@ -4,6 +4,7 @@ import "../App.css"
 import { Helmet } from "react-helmet"
 import Footer from "../components/Footer"
 import TopNav from "../components/Navbar"
+import { Link } from "react-router-dom"
 
 const Home = () => {
     //const [projectData, setProjectData] = React.useState<any>(undefined);
@@ -36,12 +37,12 @@ const Home = () => {
 
                 <br />
 
-                <a href="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large home-button">
+                <Link to="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large home-button">
                     Join Server
-                </a>
-                <a href="/backgrounds" className="button is-amariYellow is-large home-button">
+                </Link>
+                <Link to="/backgrounds" className="button is-amariYellow is-large home-button">
                     View Backgrounds
-                </a>
+                </Link>
 
                 <div style={{ height: "100px" }}></div>
 
