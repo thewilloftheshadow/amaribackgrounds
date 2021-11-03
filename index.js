@@ -11,7 +11,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 })
-const { Client, Util } = require("discord.js")
+const { Client, Util, MessageEmbed } = require("discord.js")
 const client = new Client({ intents: ["GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_PRESENCES"] })
 
 const config = {
@@ -116,6 +116,33 @@ client.on("messageCreate", async (message) => {
   }
 })
 
+client.on("interactionCreate", async (interaction) => {
+  if (interaction.isCommand()) {
+    if (interaction.commandName == "view") {
+      let tag = interaction.options.getString("tag")
+      let embed = new MessageEmbed()
+        .setDescription(`Find ${tag ? `${tagCase(tag)} ` : "many kinds of "}backgrounds for your AmariBot rank card on AmariBackgrounds, a collection of over 200 backgrounds for AmariBot!`)
+        .setTitle(`${tag ? tagCase(tag) : "All"} Backgrounds`)
+        .setURL(`https://amaribackgrounds.theshadow.xyz/backgrounds${tag ? `/${tag}` : ""}`)
+        .setThumbnail(client.user.avatarURL())
+      interaction.reply({ embeds: [embed] })
+    }
+  }
+
+  if (interaction.isAutocomplete()) {
+    if (interaction.commandName == "view") {
+      let query = interaction.options.getString("tag").toLowerCase()
+      let tagData = await cloudinary.v2.api.tags()
+      let response = []
+      tagData.tags.forEach((x) => {
+        if (!x.toLowerCase().startsWith(query)) return
+        response.push({ name: `${tagCase(x)}`, value: x })
+      })
+      interaction.respond(response)
+    }
+  }
+})
+
 setTimeout(
   () => {
     client.login(process.env.TOKEN)
@@ -125,4 +152,8 @@ setTimeout(
 
 const webLog = (msg) => {
   client.channels.cache.get(config.logs).send({ content: Util.cleanContent(msg) })
+}
+
+const tagCase = (tag) => {
+  return tag.charAt(0).toUpperCase() + tag.slice(1)
 }

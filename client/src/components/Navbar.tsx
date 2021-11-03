@@ -56,7 +56,7 @@ const TopNav = () => {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link className="nav-link" to="/backgrounds">
+              <Link className="nav-link" to="/backgrounds/request">
                 Request Backgrounds
               </Link>
             </li>
