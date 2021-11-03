@@ -39,6 +39,14 @@
   color: white;
 }
 
+a:hover {
+  color: #70503c;
+}
+
+a {
+  color: #fbeaaf;
+}
+
 .white.dropdown-item:hover {
   color: black;
 }

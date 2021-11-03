@@ -39,7 +39,7 @@ const Home = () => {
 
                 <a href="https://discord.gg/ns7JvKdD4h" target="_blank" rel="noreferrer" className="button is-amariYellow is-large home-button">
                     Join Server
-                </Link>
+                </a>
                 <Link to="/backgrounds" className="button is-amariYellow is-large home-button">
                     View Backgrounds
                 </Link>

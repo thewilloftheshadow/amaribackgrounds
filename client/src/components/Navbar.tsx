@@ -55,6 +55,11 @@ const TopNav = () => {
                 Backgrounds
               </Link>
             </li>
+            <li className="nav-item active">
+              <Link className="nav-link" to="/backgrounds">
+                Request Backgrounds
+              </Link>
+            </li>
             <li className="nav-item dropdown">
               {/* eslint-disable-next-line */}
               <Link className="nav-link dropdown-toggle" style={{ color: "white" }} to="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
