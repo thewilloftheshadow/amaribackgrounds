@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet"
 import TopNav from "../components/Navbar"
 import Footer from "../components/Footer"
 
-const NotFound = () => {
+const Request = () => {
   return (
     <div>
       <Helmet>
@@ -57,4 +57,4 @@ const NotFound = () => {
   )
 }
 
-export default NotFound
+export default Request

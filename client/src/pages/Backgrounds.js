@@ -5,7 +5,7 @@ import Footer from "../components/Footer"
 import axios from "axios"
 import React from "react"
 import usePagination from "../hooks/usePagination"
-import { saveAs } from "file-saver"
+import { Link } from "react-router-dom"
 
 
 const Backgrounds = ({ match, location }) => {
@@ -45,7 +45,9 @@ const Backgrounds = ({ match, location }) => {
         ) : (
           <>
             <div className="centerit">
-              <p className="h3 centerit pb-3">{match.params.tag ? `${match.params.tag.charAt(0).toUpperCase() + match.params.tag.slice(1)} Backgrounds` : `All Backgrounds`} ({ backgrounds.length})</p>
+              <p className="h3 centerit pb-3">
+                {match.params.tag ? `${match.params.tag.charAt(0).toUpperCase() + match.params.tag.slice(1)} Backgrounds` : `All Backgrounds`} ({backgrounds.length})
+              </p>
 
               <nav aria-label="Page Selector" className="pb-3">
                 <ul class="pagination" style={{ justifyContent: "center" }}>
@@ -89,42 +91,12 @@ const Backgrounds = ({ match, location }) => {
 }
 
 const ImageItem = (el) => {
-  const downloadImage = () => {
-    saveAs(el.item.url, "download.png") // Put your image url here.
-  }
-
-  const handleClick = () => {
-    console.log("modal-" + el.item.name)
-    //$("modal" + el.item.name).modal("show")
-  }
-
   return (
     <div className="col-12 col-md-6 col-lg-4 centerit itemthing pt-3">
       {/* <p className="h5">{el.item.title || el.item.name}</p> */}
-      <img onClick={handleClick} alt={el.item.title || el.item.name} src={el.item.url}></img>
-      <div class="modal fade" id={"modal-" + el.item.name} tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">{el.item.title || el.item.name}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <img alt={el.item.title || el.item.name} src={el.item.url}></img>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                Close
-              </button>
-              <button onClick={downloadImage} type="button" class="btn btn-primary">
-                Download
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Link to={`/view/${el.item.name}`}>
+        <img alt={el.item.title || el.item.name} src={el.item.url}></img>
+      </Link>
     </div>
   )
 }

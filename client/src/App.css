@@ -35,6 +35,10 @@
   border-color: #fbeaaf;
 }
 
+button {
+  margin-bottom: 20px;
+}
+
 .white {
   color: white;
 }

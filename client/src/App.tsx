@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound"
 import ComingSoon from "./pages/ComingSoon"
 import Backgrounds from "./pages/Backgrounds"
 import RequestBackgrounds from "./pages/Request"
+import Viewer from "./pages/Viewer"
 
 // Supabase configuration
 declare global {
@@ -35,6 +36,7 @@ const App = () => {
         <Route exact path="/backgrounds" component={Backgrounds} />
         <Route exact path="/backgrounds/request" component={RequestBackgrounds} />
         <Route path="/backgrounds/:tag" component={Backgrounds} />
+        <Route path="/view/:id" component={Viewer} />
         <Route exact path="/manage" component={ComingSoon} />
         <Route exact path="/upload" component={ComingSoon} />
         <Route component={NotFound} />
