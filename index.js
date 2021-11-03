@@ -12,7 +12,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 })
 const { Client, Util, MessageEmbed } = require("discord.js")
-const client = new Client({ intents: ["GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_PRESENCES"] })
+const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS", "GUILD_MEMBERS"] })
 
 const config = {
   guild: "778894052799545355",
