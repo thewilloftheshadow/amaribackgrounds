@@ -45,7 +45,7 @@ const Backgrounds = ({ match, location }) => {
         ) : (
           <>
             <div className="centerit">
-              <p className="h3 centerit pb-3">{match.params.tag ? `${match.params.tag.charAt(0).toUpperCase() + match.params.tag.slice(1)} Backgrounds` : `All Backgrounds`}</p>
+              <p className="h3 centerit pb-3">{match.params.tag ? `${match.params.tag.charAt(0).toUpperCase() + match.params.tag.slice(1)} Backgrounds` : `All Backgrounds`} ({ backgrounds.length})</p>
 
               <nav aria-label="Page Selector" className="pb-3">
                 <ul class="pagination" style={{ justifyContent: "center" }}>
