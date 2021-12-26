@@ -81,12 +81,6 @@ const TopNav = () => {
                 )}
               </div>
             </li>
-
-            <li className="nav-item active">
-              <a className="nav-link" href="https://discord.gg/ZfR7sr2HYr">
-                AmariBot Support Server
-              </a>
-            </li>
           </ul>
           <div className="navbar-end">
             <div className="navbar-item">
@@ -124,6 +118,9 @@ const TopNav = () => {
               )}
 
               <div className="buttons">
+                <a className="button is-amariYellow" href="https://discord.gg/ZfR7sr2HYr">
+                  AmariBot Support
+                </a>
                 {window.supabase.auth.user() ? (
                   <></>
                 ) : (
