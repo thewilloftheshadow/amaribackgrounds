@@ -123,7 +123,7 @@ client.on("interactionCreate", async (interaction) => {
       let embed = new MessageEmbed()
         .setDescription(`Find ${tag ? `${tagCase(tag)} ` : "many kinds of "}backgrounds for your AmariBot rank card on AmariBackgrounds, a collection of over 200 backgrounds for AmariBot!`)
         .setTitle(`${tag ? tagCase(tag) : "All"} Backgrounds`)
-        .setURL(`https://amaribackgrounds.theshadow.xyz/backgrounds${tag ? `/${tag.replace(" ", "%20")}` : ""}`)
+        .setURL(`https://amaribackgrounds.theshadow.xyz/backgrounds${tag ? `/${tag.replace(/ /g, "%20")}` : ""}`)
         .setThumbnail(client.user.avatarURL())
       interaction.reply({ embeds: [embed] })
     }
