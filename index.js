@@ -11,6 +11,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 })
+
 const { Client, Util, MessageEmbed } = require("discord.js")
 const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS", "GUILD_MEMBERS"] })
 
